@@ -28,9 +28,12 @@ I'll explain each step in details below.
 ## ****Project Designer Names & Reg Number:****
 ```
 **1st Person
+
       Name   :A k MOHAN RAJ
       Reg     :212221230064
+
 2nd person
+
    Name   :JAISON RAPHAEL V	 
    Reg   :212221230038**
 ```
