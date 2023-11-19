@@ -31,14 +31,7 @@ We have 6 test images. I wrote a function called `list_images()` that shows all 
 
 ```python
 def list_images(images, cols = 2, rows = 5, cmap=None):
-    """
-    Display a list of images in a single figure with matplotlib.
-        Parameters:
-            images: List of np.arrays compatible with plt.imshow.
-            cols (Default = 2): Number of columns in the figure.
-            rows (Default = 5): Number of rows in the figure.
-            cmap (Default = None): Used to display gray images.
-    """
+   
     plt.figure(figsize=(10, 11))
     for i, image in enumerate(images):
         plt.subplot(rows, cols, i+1)
@@ -58,11 +51,6 @@ I applied color selection to the original RGB images, HSV images, and HSL images
 
 ```python
 def HSL_color_selection(image):
-    """
-    Apply color selection to the HSL images to blackout everything except for white and yellow lane lines.
-        Parameters:
-            image: An np.array compatible with plt.imshow.
-    """
     #Convert the input image to HSL
     converted_image = convert_hsl(image)
     
@@ -102,11 +90,6 @@ We're interested in the area facing the camera, where the lane lines are found. 
 
 ```python
 def region_selection(image):
-    """
-    Determine and cut the region of interest in the input image.
-        Parameters:
-            image: An np.array compatible with plt.imshow.
-    """
     mask = np.zeros_like(image)   
     #Defining a 3 channel or 1 channel color to fill the mask with depending on the input image
     if len(image.shape) > 2:
@@ -133,16 +116,11 @@ The Hough transform is a technique which can be used to isolate features of a pa
 
 ```python
 def hough_transform(image):
-    """
-    Determine and cut the region of interest in the input image.
-        Parameters:
-            image: The output of a Canny transform.
-    """
-    rho = 1              #Distance resolution of the accumulator in pixels.
-    theta = np.pi/180    #Angle resolution of the accumulator in radians.
-    threshold = 20       #Only lines that are greater than threshold will be returned.
-    minLineLength = 20   #Line segments shorter than that are rejected.
-    maxLineGap = 300     #Maximum allowed gap between points on the same line to link them
+    rho = 1              
+    theta = np.pi/180    
+    threshold = 20       
+    minLineLength = 20   
+    maxLineGap = 300    
     return cv2.HoughLinesP(image, rho = rho, theta = theta, threshold = threshold,
                            minLineLength = minLineLength, maxLineGap = maxLineGap)
 ```
@@ -152,11 +130,7 @@ def hough_transform(image):
 We have multiple lines detected for each lane line. We need to average all these lines and draw a single line for each lane line. We also need to extrapolate the lane lines to cover the full lane line length.
 ```python
 def average_slope_intercept(lines):
-    """
-    Find the slope and intercept of the left and right lanes of each image.
-        Parameters:
-            lines: The output lines from Hough Transform.
-    """
+    
     left_lines    = [] #(slope, intercept)
     left_weights  = [] #(length,)
     right_lines   = [] #(slope, intercept)
@@ -180,13 +154,7 @@ def average_slope_intercept(lines):
     return left_lane, right_lane
 
 def pixel_points(y1, y2, line):
-    """
-    Converts the slope and intercept of each line into pixel points.
-        Parameters:
-            y1: y-value of the line's starting point.
-            y2: y-value of the line's end point.
-            line: The slope and intercept of the line.
-    """
+   
     if line is None:
         return None
     slope, intercept = line
@@ -197,12 +165,7 @@ def pixel_points(y1, y2, line):
     return ((x1, y1), (x2, y2))
 
 def lane_lines(image, lines):
-    """
-    Create full lenght lines from pixel points.
-        Parameters:
-            image: The input test image.
-            lines: The output lines from Hough Transform.
-    """
+   
     left_lane, right_lane = average_slope_intercept(lines)
     y1 = image.shape[0]
     y2 = y1 * 0.6
@@ -211,14 +174,7 @@ def lane_lines(image, lines):
     return left_line, right_line
     
 def draw_lane_lines(image, lines, color=[255, 0, 0], thickness=12):
-    """
-    Draw lines onto the input image.
-        Parameters:
-            image: The input test image.
-            lines: The output lines from Hough Transform.
-            color (Default = red): Line color.
-            thickness (Default = 12): Line thickness. 
-    """
+   
     line_image = np.zeros_like(image)
     for line in lines:
         if line is not None:
@@ -234,11 +190,7 @@ The video inputs are in test_videos folder. The video outputs are generated in o
 
 ```python
 def frame_processor(image):
-    """
-    Process the input frame to detect lane lines.
-        Parameters:
-            image: Single video frame.
-    """
+    
     color_select = HSL_color_selection(image)
     gray         = gray_scale(color_select)
     smooth       = gaussian_smoothing(gray)
@@ -249,12 +201,7 @@ def frame_processor(image):
     return result
 
 def process_video(test_video, output_video):
-    """
-    Read input video stream and produce a video file with detected lane lines.
-        Parameters:
-            test_video: Input video.
-            output_video: A video file with detected lane lines.
-    """
+   
     input_video = VideoFileClip(os.path.join('test_videos', test_video), audio=False)
     processed = input_video.fl_image(frame_processor)
     processed.write_videofile(os.path.join('output_videos', output_video), audio=False)
