@@ -25,6 +25,8 @@ I'll explain each step in details below.
 - Python 3.6.2
 - OpenCV 3.1.0
 
+##**Project Designer Names & Reg Number:**
+
 ### **1. Loading test images:**
 ----
 We have 6 test images. I wrote a function called `list_images()` that shows all the test images we're working on using matplotlib.
