@@ -25,8 +25,8 @@ I'll explain each step in details below.
 - Python 3.6.2
 - OpenCV 3.1.0
 
-## ****Project Designer Names & Reg Number:****
-##***1st Person***
+## ****Project Designer Names & Reg Number:****##
+**1st Person***
 ##***A k MOHAN RAJ***
 ##***212221230064***
 ##***2nd person***
