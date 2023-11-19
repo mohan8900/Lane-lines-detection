@@ -26,13 +26,12 @@ I'll explain each step in details below.
 - OpenCV 3.1.0
 
 ## ****Project Designer Names & Reg Number:****
-***1st Person***
-
-***A k MOHAN RAJ***
-***212221230064***
-***2nd person***
-***JAISON RAPHAEL V***	 
-***212221230038***
+##***1st Person***
+##***A k MOHAN RAJ***
+##***212221230064***
+##***2nd person***
+##***JAISON RAPHAEL V***	 
+##***212221230038***
 
 
 ### **1. Loading test images:**
