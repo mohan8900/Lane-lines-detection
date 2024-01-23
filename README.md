@@ -32,10 +32,7 @@ I'll explain each step in details below.
       Name   :A k MOHAN RAJ
       Reg     :212221230064
 
-2nd person
 
-      Name   :JAISON RAPHAEL V	 
-      Reg   :212221230038
 ```
 
 ### **1. Loading test images:**
